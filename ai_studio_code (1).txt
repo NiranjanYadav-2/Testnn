@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "configured": true,
+  "prescreener_required": false,
+  "currency": "Points",
+  "count": 4,
+  "surveys": [
+    {
+      "id": "tw_102934",
+      "title": "Consumer Opinion & Electronics Study",
+      "description": "5-minute market research survey",
+      "loi": 5,
+      "usd_rate": 0.35,
+      "currency_amount": 350,
+      "link": "https://timewall.io/survey/..."
+    }
+  ]
+}
