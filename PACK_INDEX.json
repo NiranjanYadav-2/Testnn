@@ -1,0 +1,21 @@
+{
+  "pack": "ManifestMate Documentation & Claude Handoff Pack",
+  "files": [
+    "CLAUDE_MASTER_PROMPT.md",
+    "CLAUDE_PHASE_PROMPTS.md",
+    "OWNER_CHECKLIST.md",
+    "README.md",
+    "docs/01_PRODUCT_REQUIREMENTS.md",
+    "docs/02_INFORMATION_ARCHITECTURE_UX.md",
+    "docs/03_UI_DESIGN_SYSTEM.md",
+    "docs/04_MODULAR_ARCHITECTURE.md",
+    "docs/05_FEATURE_SPECIFICATIONS.md",
+    "docs/06_DATA_MODEL_AND_STORAGE.md",
+    "docs/07_NOTIFICATIONS_AND_SCHEDULING.md",
+    "docs/08_PRIVACY_SECURITY_AND_BACKUP.md",
+    "docs/09_TESTING_AND_ACCEPTANCE.md",
+    "docs/10_BUILD_AND_RELEASE.md",
+    "docs/11_IMPLEMENTATION_ROADMAP.md"
+  ],
+  "count": 15
+}

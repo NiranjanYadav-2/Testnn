@@ -1,212 +1,50 @@
-# 🎙️ AuraVoice - On-Device Neural TTS Studio
+# ManifestMate — Documentation & Claude Handoff Pack
 
-**AuraVoice** is a production-grade, privacy-first Android application for high-fidelity, real-time Text-to-Speech (TTS) synthesis. Designed with an **on-device neural architecture**, AuraVoice runs state-of-the-art TTS models directly on the user's device via ONNX Runtime — delivering near-instant speech generation with zero cloud latency and zero voice data logging.
+**Purpose:** This pack is the product, design, architecture, implementation, and QA source of truth for building ManifestMate with Claude or another coding assistant.
 
----
+## Product summary
+ManifestMate is an offline-first Android app that helps people clarify goals, practice intention-setting rituals, journal, and take practical actions toward their goals. Rituals are presented as reflection/focus habits, not as guaranteed ways to make outcomes happen.
 
-## 🌟 Key Highlights
+## Locked decisions
+- App name: **ManifestMate** (working name; check Play Store name availability, trademarks, and domain before public release).
+- Platform: Android.
+- Language/UI: Kotlin + Jetpack Compose.
+- Architecture: highly modular, loosely coupled, feature-isolated Gradle modules.
+- V1: offline-first; core features work without login, backend, or internet.
+- V2: backup/restore may be added later; design V1 data and repository boundaries so this is possible.
+- Main navigation: Home, Goals, Rituals, Journal, Progress.
+- Visual direction: premium cosmic, balanced and readable—not cluttered.
+- Palette: Midnight Purple `#171329`, Lavender `#A99AEF`, Champagne Gold `#E7C98B`, Soft White `#F5F1FA`.
+- Typography: Manrope for brand/display headings; Roboto for body text and controls. Bundle font files and verify their licenses before shipping.
+- Icons: consistent rounded vector icons, preferably Material Symbols Rounded or another consistent Android-compatible vector set.
+- Strong separation: no feature should import another feature's internal UI/ViewModel/repository implementation.
+- Do not put an entire screen or feature into one giant file.
 
-- **100% On-Device Neural Speech Generation**: Runs **Kokoro-82M ONNX** and **Piper ONNX** models directly on the Android NPU/CPU using ONNX Runtime.
-- **Dual Neural Engines**:
-  - **Kokoro 82M ONNX**: Ultra-realistic 82-million parameter neural TTS engine support with 50+ custom voice style embeddings (`.bin`).
-  - **Piper ONNX**: Fast, lightweight neural voice engine supporting 170+ voice models across 30+ languages.
-- **Public Audio Export & Sharing**: Automatically exports generated `.wav` speech clips to the public `Music/AuraVoice` folder via Android `MediaStore`, making files easily discoverable in standard File Managers and Music Player apps. Native sharing via Android `FileProvider`.
-- **Firebase Dynamic Catalog**: Lightweight Cloud Firestore integration to sync voice model metadata, download mirrors, and usage statistics **without** saving large raw audio files to cloud storage.
-- **Offline First**: All synthesized audio is generated locally. Cached voice models and speech history are persisted using Room Database.
-- **Material 3 Design System**: Clean, modern dark/light themes with animated audio visualizers, dynamic pitch/rate controls, and intuitive model downloading screens.
+## Documents
+1. `docs/01_PRODUCT_REQUIREMENTS.md` — product goals, scope, personas, non-goals, acceptance criteria.
+2. `docs/02_INFORMATION_ARCHITECTURE_UX.md` — navigation, screens, user flows, onboarding.
+3. `docs/03_UI_DESIGN_SYSTEM.md` — colors, typography, spacing, components, accessibility.
+4. `docs/04_MODULAR_ARCHITECTURE.md` — Gradle modules, dependency rules, contracts, package structure.
+5. `docs/05_FEATURE_SPECIFICATIONS.md` — detailed behavior for each feature.
+6. `docs/06_DATA_MODEL_AND_STORAGE.md` — Room entities, relations, persistence, migration rules.
+7. `docs/07_NOTIFICATIONS_AND_SCHEDULING.md` — reminder preferences and Android scheduling requirements.
+8. `docs/08_PRIVACY_SECURITY_AND_BACKUP.md` — privacy, offline storage, future backup boundaries.
+9. `docs/09_TESTING_AND_ACCEPTANCE.md` — test strategy and release gates.
+10. `docs/10_BUILD_AND_RELEASE.md` — build setup, CI, signing, APK/AAB delivery.
+11. `docs/11_IMPLEMENTATION_ROADMAP.md` — implementation phases and Definition of Done.
+12. `CLAUDE_MASTER_PROMPT.md` — instructions to give Claude before coding.
+13. `CLAUDE_PHASE_PROMPTS.md` — phase-by-phase prompts for controlled implementation.
 
----
+## How to use with Claude
+1. Upload this ZIP to Claude or extract it in the repository.
+2. Read `CLAUDE_MASTER_PROMPT.md` first.
+3. Ask Claude to review all docs and return a proposed implementation plan before editing files.
+4. Build in phases from `docs/11_IMPLEMENTATION_ROADMAP.md`; do not ask for the whole app in one giant response.
+5. After each phase, run Gradle build/tests and review changed files.
+6. Ask Claude to update these docs when a decision changes. Keep the docs and code aligned.
 
-## 🏗️ System Architecture
-
-```
-                                  +-----------------------+
-                                  |   Firebase Firestore  |
-                                  | (Voice Metadata Only) |
-                                  +-----------+-----------+
-                                              |
-                                              v
-+------------------------+        +-----------+-----------+        +-----------------------+
-|  Hugging Face Mirrors  | ------ |   Voice Model Repository  | ------ |   Room Database       |
-| (Kokoro ONNX & Piper)  |        |    (AuraVoice Engine)    |        | (Local Model Registry)|
-+------------------------+        +-----------+-----------+        +-----------------------+
-                                              |
-                                              v
-                                  +-----------+-----------+
-                                  |    ONNX Runtime Engine    |
-                                  |  (Kokoro 82M & Piper C++) |
-                                  +-----------+-----------+
-                                              |
-                                              v
-                                  +-----------+-----------+
-                                  | Local Audio WAV Generator |
-                                  +-----------+-----------+
-                                              |
-                                              v
-                                  +-----------+-----------+
-                                  |  Music/AuraVoice Folder   |
-                                  |  & Android FileProvider   |
-                                  +-----------------------+
-```
-
----
-
-## 📂 Hugging Face Repositories & Engine Specifications
-
-AuraVoice dynamically fetches official ONNX model weights and voice configuration metadata from Hugging Face repositories:
-
-### 1. Piper Voices Repository
-- **URL**: [https://huggingface.co/NiranjanY/piper-voices](https://huggingface.co/NiranjanY/piper-voices)
-- **Primary Index**: `resolve/main/voices.json`
-- **Structure**:
-  ```json
-  {
-    "ar_JO-kareem-medium": {
-      "key": "ar_JO-kareem-medium",
-      "name": "kareem",
-      "language": {
-        "code": "ar_JO",
-        "family": "ar",
-        "region": "JO",
-        "name_native": "العربية",
-        "name_english": "Arabic"
-      },
-      "quality": "medium",
-      "files": {
-        "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx": { "size_bytes": 63201294 },
-        "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx.json": { "size_bytes": 5024 }
-      }
-    }
-  }
-  ```
-
-### 2. Kokoro 82M ONNX Repository
-- **URL**: [https://huggingface.co/NiranjanY/Kokoro-82M-v1.0-ONNX](https://huggingface.co/NiranjanY/Kokoro-82M-v1.0-ONNX)
-- **Model Weights (`/onnx`)**: `model.onnx`, `model_quantized.onnx` (~92MB), `model_q8f16.onnx` (~86MB), `model_q4f16.onnx` (~154MB).
-- **Voice Embeddings (`/voices`)**: Binary 256-dimensional float vector files (`af_bella.bin`, `am_adam.bin`, `bf_emma.bin`, `zf_xiaobei.bin`, etc.).
-
----
-
-## 🌐 Language & Code Reference Guide
-
-When adding or configuring new languages in AuraVoice or updating Firebase/HuggingFace indices, keep in mind the distinction between these standard identifier formats:
-
-| Concept | Example | Explanation | Usage in AuraVoice |
-|---|---|---|---|
-| **BCP-47 Code** | `en-US`, `hi-IN`, `ar-JO` | IETF standard language tag separated by a hyphen `-`. | Used in Android Locale, Android TTS settings, and UI display. |
-| **Language Slug ID** | `en_US`, `hi_IN`, `ar_JO` | File-system safe folder/identifier tag separated by an underscore `_`. | Used in Hugging Face repository folder paths, model key prefixes, and local file storage. |
-
----
-
-## 🛡️ Firebase & Privacy Architecture
-
-- **No Cloud Audio Storage**: To protect user privacy and avoid unnecessary server bandwidth costs, generated audio files (`.wav`) are **NEVER uploaded to Firebase Storage or external servers**.
-- **Local Persistence Only**: All synthesized files remain strictly in the app's local storage and the user's public `Music/AuraVoice` folder.
-- **Firestore Usage**: Used exclusively for:
-  - User authentication / anonymous session records.
-  - Remote configuration of featured voice models and Hugging Face mirror endpoints.
-  - Minimal metadata history logs (text snippet preview, timestamp, engine type used).
-
----
-
-## ⚙️ Configuration & Release Build Instructions
-
-### Prerequisites
-- **JDK**: Version 17 or higher
-- **Android SDK**: API Level 34 (Target SDK), Minimum API Level 26
-- **Gradle**: Kotlin DSL (`.gradle.kts`)
-
-### Release Signing Setup
-To sign release APKs / AABs, configure your keystore properties in `app/build.gradle.kts` or environment variables:
-
-- **Key Store File**: `keystore.jks`
-- **Key Alias**: `auravoice`
-- **Store Password**: Configured via build secrets / local properties
-- **Key Password**: Configured via build secrets / local properties
-
-```kotlin
-android {
-    signingConfigs {
-        create("release") {
-            storeFile = file("keystore.jks")
-            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: "YOUR_STORE_PASSWORD"
-            keyAlias = "auravoice"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: "YOUR_KEY_PASSWORD"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("release")
-        }
-    }
-}
-```
-
-### Build Commands
-
-1. **Compile & Lint Check**:
-   ```bash
-   gradle compileDebugKotlin
-   ```
-
-2. **Build Debug APK**:
-   ```bash
-   gradle :app:assembleDebug
-   ```
-
-3. **Build Release APK**:
-   ```bash
-   gradle :app:assembleRelease
-   ```
-
-4. **Run Unit Tests**:
-   ```bash
-   gradle :app:testDebugUnitTest
-   ```
-
----
-
-## 📁 Repository Structure
-
-```
-AuraVoice/
-├── app/
-│   ├── build.gradle.kts
-│   ├── proguard-rules.pro
-│   └── src/main/java/com/auravoice/tts/
-│       ├── data/
-│       │   ├── local/            # Room Database entities, DAOs, & Migrations
-│       │   ├── remote/           # FirebaseManager & HuggingFaceApiService
-│       │   └── repository/       # VoiceRepository & UserRepository
-│       ├── engine/               # KokoroEngine & PiperEngine (ONNX synthesis)
-│       ├── ui/
-│       │   ├── components/       # Waveforms, dialogs, sliders & cards
-│       │   ├── screens/
-│       │   │   ├── home/         # Primary TTS studio interface
-│       │   │   ├── history/      # Speech history & audio player
-│       │   │   ├── models/       # Voice model browser & downloader
-│       │   │   ├── cache/        # Storage management & cache cleaner
-│       │   │   ├── profile/      # User profile & stats
-│       │   │   └── settings/     # App settings & keystore/storage info
-│       │   └── theme/            # Material 3 Color Schemes & Typography
-│       └── util/                 # AudioExportUtils, FileProvider, & Extensions
-├── gradle/                       # Version catalogs (libs.versions.toml)
-├── metadata.json                 # AI Studio Platform Metadata
-└── README.md                     # Project documentation
-```
-
----
-
-## 👨‍💻 Maintainer & Contact
-
-- **Lead Engineer**: Niranjan Y.
-- **Hugging Face Hub**: [NiranjanY on HuggingFace](https://huggingface.co/NiranjanY)
-- **App Theme**: Modern Neural Voice Studio
-- **Package Name**: `com.auravoice.tts`
-
----
-
-*AuraVoice — Engineered for Performance, Privacy, and Precision On-Device Speech.*
+## Important implementation notes
+- This is a specification pack, not an already-built Android app.
+- Exact dependency versions, `minSdk`, `targetSdk`, package ID, and CI environment must be selected and verified at implementation time against current Android/Gradle compatibility.
+- Do not claim a build passed unless the build was actually run and its result inspected.
+- Do not commit signing keys, passwords, service-account private keys, or secrets.
