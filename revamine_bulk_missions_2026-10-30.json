@@ -1,0 +1,344 @@
+[
+  {
+    "title": "Adapting to Change",
+    "question": "How do you usually respond when an unexpected change disrupts your plans?",
+    "description": "Share how you handle sudden changes in everyday life.",
+    "type": "poll",
+    "options": [
+      "I adapt quickly",
+      "I need some time to adjust",
+      "I look for another solution",
+      "I feel stressed at first"
+    ],
+    "points": 8,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Building Trust",
+    "question": "What makes you trust someone the most?",
+    "description": "Choose the quality that matters most when building trust.",
+    "type": "poll",
+    "options": [
+      "Their honesty",
+      "Their consistent actions",
+      "Their willingness to help",
+      "Their ability to keep promises"
+    ],
+    "points": 11,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Focus Breakers",
+    "question": "What most often breaks your concentration?",
+    "description": "Tell us what usually interrupts your focus.",
+    "type": "poll",
+    "options": [
+      "Phone notifications",
+      "Background noise",
+      "Overthinking",
+      "Too many tasks at once"
+    ],
+    "points": 6,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Handling Mistakes",
+    "question": "When you make a mistake, what do you usually do first?",
+    "description": "Choose the response that best describes your usual reaction.",
+    "type": "poll",
+    "options": [
+      "Try to fix it immediately",
+      "Understand what went wrong",
+      "Ask someone for advice",
+      "Move on and avoid thinking about it"
+    ],
+    "points": 9,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Decision-Making Style",
+    "question": "How do you usually make an important decision?",
+    "description": "Share the approach you rely on when a decision matters.",
+    "type": "poll",
+    "options": [
+      "Compare the available options",
+      "Trust my instincts",
+      "Ask others for advice",
+      "Take time before deciding"
+    ],
+    "points": 7,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Your Group Role",
+    "question": "What role do you naturally take in a group discussion?",
+    "description": "Choose the option that sounds most like you.",
+    "type": "poll",
+    "options": [
+      "I usually speak first",
+      "I listen before sharing my thoughts",
+      "I contribute when I have something useful to add",
+      "I prefer to observe quietly"
+    ],
+    "points": 10,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Learning Preferences",
+    "question": "What helps you learn a new skill most effectively?",
+    "description": "Tell us which learning approach works best for you.",
+    "type": "poll",
+    "options": [
+      "Practicing it myself",
+      "Watching someone demonstrate it",
+      "Reading clear explanations",
+      "Teaching it to someone else"
+    ],
+    "points": 5,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Handling Disagreement",
+    "question": "When someone disagrees with your opinion, what do you usually do?",
+    "description": "Choose how you tend to respond to a different point of view.",
+    "type": "poll",
+    "options": [
+      "Explain why I think differently",
+      "Listen to their reasoning",
+      "Look for common ground",
+      "Avoid the argument"
+    ],
+    "points": 12,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Staying Motivated",
+    "question": "What motivates you most to finish a difficult task?",
+    "description": "Pick the factor that gives you the strongest push to keep going.",
+    "type": "poll",
+    "options": [
+      "Seeing my progress",
+      "Having a deadline",
+      "Personal curiosity",
+      "Receiving recognition"
+    ],
+    "points": 8,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Remembering Information",
+    "question": "What do you prefer to do when trying to remember important information?",
+    "description": "Choose the method you naturally use most often.",
+    "type": "poll",
+    "options": [
+      "Write it down",
+      "Repeat it several times",
+      "Connect it with real examples",
+      "Explain it to someone"
+    ],
+    "points": 6,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Being Interrupted",
+    "question": "What is your usual reaction when someone interrupts you?",
+    "description": "Choose the response that best matches your everyday behavior.",
+    "type": "poll",
+    "options": [
+      "Calmly continue speaking",
+      "Ask them to let me finish",
+      "Stop and listen",
+      "Sometimes lose my train of thought"
+    ],
+    "points": 10,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Your Ideal Break",
+    "question": "What kind of break helps you feel refreshed?",
+    "description": "Share the small activity that helps you reset.",
+    "type": "poll",
+    "options": [
+      "Taking a short walk",
+      "Listening to music",
+      "Sitting quietly",
+      "Talking with someone"
+    ],
+    "points": 7,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Multitasking and Focus",
+    "question": "Trying to perform two demanding tasks at the same time can reduce performance compared with focusing on one task at a time.",
+    "description": "Test your understanding of attention and task switching.",
+    "type": "true_false",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correctOptionIndex": 0,
+    "points": 9,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Sleep and Memory",
+    "question": "Getting enough sleep can help the brain consolidate newly learned information.",
+    "description": "A quick check on the relationship between sleep and memory.",
+    "type": "true_false",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correctOptionIndex": 0,
+    "points": 7,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "First Impressions",
+    "question": "A person's first impression of someone always accurately predicts that person's actual personality.",
+    "description": "Think carefully about whether first impressions are always reliable.",
+    "type": "true_false",
+    "options": [
+      "True",
+      "False"
+    ],
+    "correctOptionIndex": 1,
+    "points": 11,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Understanding Confirmation Bias",
+    "question": "What is confirmation bias?",
+    "description": "Test your knowledge of a common thinking pattern.",
+    "type": "mcq",
+    "options": [
+      "Remembering only negative experiences",
+      "Preferring information that supports existing beliefs",
+      "Changing opinions whenever someone disagrees",
+      "Making decisions without any information"
+    ],
+    "correctOptionIndex": 1,
+    "points": 8,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Working Memory",
+    "question": "What is the primary function of working memory?",
+    "description": "A question about how the mind temporarily handles information.",
+    "type": "mcq",
+    "options": [
+      "Storing every memory permanently",
+      "Temporarily holding and manipulating information",
+      "Controlling all emotional reactions",
+      "Automatically creating long-term habits"
+    ],
+    "correctOptionIndex": 1,
+    "points": 10,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Classical Conditioning",
+    "question": "Which psychologist is famously associated with classical conditioning experiments involving dogs?",
+    "description": "Recall a well-known figure in the history of psychology.",
+    "type": "mcq",
+    "options": [
+      "B. F. Skinner",
+      "Ivan Pavlov",
+      "Abraham Maslow",
+      "Carl Rogers"
+    ],
+    "correctOptionIndex": 1,
+    "points": 6,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "The Availability Heuristic",
+    "question": "Someone believes plane crashes are very common simply because they recently watched several dramatic news reports about them. Which concept best explains this?",
+    "description": "Identify the mental shortcut that can shape judgments of likelihood.",
+    "type": "mcq",
+    "options": [
+      "Confirmation Bias",
+      "Availability Heuristic",
+      "Halo Effect",
+      "Social Facilitation"
+    ],
+    "correctOptionIndex": 1,
+    "points": 12,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  },
+  {
+    "title": "Fundamental Attribution Error",
+    "question": "Someone sees a person arrive late and assumes they are irresponsible, without considering possible reasons such as traffic or an emergency. Which bias does this best demonstrate?",
+    "description": "A more challenging question about how people explain others' behavior.",
+    "type": "mcq",
+    "options": [
+      "Dunning-Kruger Effect",
+      "Fundamental Attribution Error",
+      "Anchoring Bias",
+      "Loss Aversion"
+    ],
+    "correctOptionIndex": 1,
+    "points": 12,
+    "countries": [
+      "GLOBAL"
+    ],
+    "expiresInDays": 3
+  }
+]
